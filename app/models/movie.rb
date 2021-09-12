@@ -1,5 +1,7 @@
 class Movie < ApplicationRecord
   include PgSearch
+  include Highlightable
+  
   multisearchable against: [:title], if: lambda{ |record| record.serie. nil ? }
   
   belongs_to :serie, optional: true
