@@ -1,49 +1,22 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      get 'dashboards/index'
-    end
-  end
-  namespace :api do
-    namespace :v1 do
-      get 'recommendations/index'
-    end
-  end
-  namespace :api do
-    namespace :v1 do
-      get 'executions/create'
-      get 'executions/update'
-    end
-  end
-  namespace :api do
-    namespace :v1 do
-      get 'series/show'
-    end
-  end
-  namespace :api do
-    namespace :v1 do
-      get 'movies/show'
-    end
-  end
-  namespace :api do
-    namespace :v1 do
-      get 'searches/index'
-    end
-  end
-  namespace :api do
-    namespace :v1 do
-      get 'reviews/index'
-      get 'reviews/create'
-    end
-  end
-  namespace :api do
-    namespace :v1 do
-      get 'favorites/index'
-      get 'favorites/create'
-      get 'favorites/destroy'
-    end
-  end
-  get 'home/index'
   devise_for :users
-  root to: "home#index"
+  
+  namespace :api do
+   namespace :v1 do
+    get '/dashboard', to: 'dashboards#index', as: 'dashboard'
+    resources :favorites, path: "my_list", only: %i( index create )
+    delete '/my_list/:type/:id', to: 'favorites#destroy'
+    resources :reviews, only: [:index, :create]
+    resources :searches, path: "search", only: :index
+    resources :series, only: :show
+    resources :movies, only: :show do
+     member do
+      get '/executions', to: 'executions#show'
+      put '/executions', to: 'executions#update'    
+     end
+    end
+    resources :recommendations, only: :index
+   end
+  end
+  root :to => "home#index"
 end
