@@ -7,7 +7,7 @@ class Api::V1::FavoritesController < ApplicationController
   end
    
   def create
-    @favorite = Favorite.new(favorite_params)
+    @favorite = Favorite.new(favorite_params).merge(user: current_user)
     if @favorite.save
      head :ok
     else
@@ -28,6 +28,6 @@ class Api::V1::FavoritesController < ApplicationController
     end
     
     def favorite_params
-      params.require(:favorite).permit(:favoritable_type, :favoritable_id).merge(user: current_user)
+      params.require(:favorite).permit(:favoritable_type, :favoritable_id)
     end
 end
