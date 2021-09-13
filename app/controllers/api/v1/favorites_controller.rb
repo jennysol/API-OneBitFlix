@@ -7,7 +7,7 @@ class Api::V1::FavoritesController < ApplicationController
   end
    
   def create
-    @favorite = Favorite.new(favorite_params).merge(user: current_user)
+    @favorite = Favorite.new(favorite_params.merge(user: current_user))
     if @favorite.save
      head :ok
     else
