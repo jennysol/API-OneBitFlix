@@ -1,4 +1,7 @@
 class Api::V1::ReviewSerializer
   include FastJsonapi::ObjectSerializer
-  attributes 
-end
+
+  attributes :rating, :description
+  
+  belongs_to :user
+ end
