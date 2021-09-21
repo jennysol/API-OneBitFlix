@@ -19,4 +19,4 @@ class Api::V1::MovieSerializer
       params[:user].favorites.where(favoritable: object).exists?
     end
   end
- end
+end
