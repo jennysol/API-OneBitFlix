@@ -69,8 +69,13 @@ ActiveRecord::Schema.define(version: 2021_09_09_002235) do
   create_table "reviews", force: :cascade do |t|
     t.integer "rating"
     t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "reviewable_type"
+    t.bigint "reviewable_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "series", force: :cascade do |t|
