@@ -23,20 +23,17 @@ class Api::V1::SerieSerializer
   
   attribute :thumbnail_url do |object|
   
-  AWS_BUCKET.object("thumbnails/#{object.thumbnail_key}").presigned_url
-    (:get, expires_in: 120)
+    AWS_BUCKET.object("thumbnails/#{object.thumbnail_key}").presigned_url(:get, expires_in: 120)
   end
   
   attribute :thumbnail_cover_url do |object|
   
-  AWS_BUCKET.object("thumbnails/#{object.thumbnail_cover_key}").presign
-    ed_url(:get, expires_in: 120)
+    AWS_BUCKET.object("thumbnails/#{object.thumbnail_cover_key}").presigned_url(:get, expires_in: 120)
   end
   
   attribute :featured_thumbnail_url do |object|
-    if object[:featured_thumbnail_key].present?p
-      AWS_BUCKET.object("thumbnails/#{object.featured_thumbnail_key}").pres
-        igned_url(:get, expires_in: 120)
+    if object[:featured_thumbnail_key].present?
+      AWS_BUCKET.object("thumbnails/#{object.featured_thumbnail_key}").presigned_url(:get, expires_in: 120)
     end
   end
  end
