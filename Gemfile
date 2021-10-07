@@ -72,3 +72,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #service de images
 gem "aws-sdk-s3"
+
+gem 'foreman'
